@@ -1,6 +1,7 @@
 package com.rita.librery;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -9,9 +10,12 @@ public class DataReaders {
 	// books
 
 	public DataReaders() {
+
+		char s = File.pathSeparatorChar;
+		String path = "librery" + s + "src" + s + "main" + s + "resources" + s + "data" + s + "Readers.txt";
+		System.out.println(path);
 		try {
-			BufferedReader readersR = new BufferedReader(
-					new FileReader("C:\\Users\\rita_\\Documents\\codes\\Library System\\src\\Readers.txt"));
+			BufferedReader readersR = new BufferedReader(new FileReader(path));
 			String contentReaders = readersR.readLine();
 
 			String[] dataR;// create an array of string that is going to hold the dataR
