@@ -4,18 +4,32 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 public class DataReaders {
 	// scanner to read the txt files of reader... people who are going to read the
 	// books
 
 	public DataReaders() {
+		String c = File.separator;
+		File file = null;
+		String fileName = "data" + c + "Books.txt";
+		ClassLoader classLoader = getClass().getClassLoader();
+		URL resource = classLoader.getResource(fileName);
+		if (resource == null) {
+			throw new IllegalArgumentException("file not found! " + fileName);
+		} else {
+			try {
+				file = new File(resource.toURI());
+			} catch (URISyntaxException e) {
+				e.printStackTrace();
+			}
+		}
 
-		char s = File.pathSeparatorChar;
-		String path = "librery" + s + "src" + s + "main" + s + "resources" + s + "data" + s + "Readers.txt";
-		System.out.println(path);
+		System.out.println(file.getAbsolutePath());
 		try {
-			BufferedReader readersR = new BufferedReader(new FileReader(path));
+			BufferedReader readersR = new BufferedReader(new FileReader(file.getAbsolutePath()));
 			String contentReaders = readersR.readLine();
 
 			String[] dataR;// create an array of string that is going to hold the dataR
